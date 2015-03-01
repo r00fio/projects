@@ -1,5 +1,6 @@
 .idea/
 .out/
+.git/
 *.iml
 *.iws
 # Compiled source #
