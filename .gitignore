@@ -1,8 +1,18 @@
 .idea/
 .out/
 .git/
+.gradle/
+build/
 *.iml
 *.iws
+*.MF
+*.class
+*.kotlin_class
+*.bat
+*.bin
+*.lock
+*.hprof
+
 # Compiled source #
 ###################
 *.com
@@ -23,6 +33,7 @@
 *.jar
 *.rar
 *.tar
+*.war
 *.zip
  
 # Logs and databases #
