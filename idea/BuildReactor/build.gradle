@@ -1,0 +1,110 @@
+buildscript {
+    ext.kotlin_version = '0.9.976'
+    repositories {
+        mavenCentral()
+        maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.wiredforcode:gradle-heroku-plugin:1.0.0"
+    }
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    version = '1.0'
+    compileJava.options.fork = true
+    compileJava.options.forkOptions.executable = '/home/bebe/work/ide/idea-IU-135.1306/bin/javac'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        compile group: 'com.google.guava', name: 'guava', version:'18.0'
+        testCompile "junit:junit:4.11"
+    }
+    task printProps << {
+        println org.gradle.java.home
+        println System.properties['system']
+    }
+}
+//
+//project(':untitled') {
+//    apply plugin: 'war'
+//    apply plugin: 'heroku'
+//    apply plugin: 'idea'
+//    apply plugin: 'kotlin'
+//    sourceSets {
+//        main.kotlin.srcDirs += 'src/main/kotlin'
+//        main.java.srcDirs += 'src/main/java'
+//    }
+//
+//    version = '1.0'
+//    repositories {
+//        mavenCentral()
+//        maven { url 'http://maven.apache.org' }
+//        maven { url 'http://conjars.org/repo' }
+//    }
+//    dependencies {
+//        compile project(':java-speech-api')
+//        testCompile group: 'junit', name: 'junit', version: '4.11'
+//        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//        compile group: 'javax', name: 'javaee-api', version: '7.0'
+//        compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+//        compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+//        compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.2.0.Final'
+//        compile group: 'postgresql', name: 'postgresql', version: '9.1-901.jdbc4'
+//    }
+//    heroku {
+//        //get this from heroku
+//        apiKey = 'be646ba1-b72c-4cc9-88a6-610f02035367'
+//        //set this on first run if you don't want a generated name
+//        appName = 'mysimplekotlinapp'
+//        //set this if you are not happy with the default gradlew buildpack
+//        //buildpack = 'http://somebuildpack
+//    }
+//}
+//
+//project(':java-speech-api'){
+//    dependencies{
+//        compile group: 'net.sourceforge.javaflacencoder', name: 'java-flac-encoder', version: '0.3.1'
+//        compile group: 'com.google.code.gson', name: 'gson', version: '2.3'
+//    }
+//
+//}
+//project(':disruptor'){
+//    dependencies{
+//        compile group: 'com.lmax', name: 'disruptor', version: '3.3.0'
+//        compile 'com.pushtorefresh:javac-warning-annotation:1.0.0'
+//    }
+//}
+
+
+
+def getArtifacts(name) {
+    subprojects.findAll {it.name.contains(name)}
+}
+task buildDisruptor {
+//    dependsOn getArtifacts('disruptor').clean
+    dependsOn getArtifacts('disruptor').build
+    dependsOn getArtifacts('disruptor').install
+}
+task buildDmaInJava {
+//    dependsOn getArtifacts('dma-in-java').clean
+    dependsOn getArtifacts('dma-in-java').build
+    dependsOn getArtifacts('dma-in-java').install
+}
+task buildNettyOverview{
+//    dependsOn getArtifacts('netty-overview').clean
+    dependsOn getArtifacts('netty-overview').build
+    dependsOn getArtifacts('netty-overview').install
+}

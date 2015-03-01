@@ -1,0 +1,18 @@
+apply plugin: 'java'
+compileJava.options.fork = true
+compileJava.options.forkOptions.executable = '/home/bebe/work/ide/idea-IU-135.1306/bin/javac'
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'io.netty', name: 'netty-all', version:'5.0.0.Alpha1'
+    compile group: 'io.netty', name: 'netty-example', version:'5.0.0.Alpha1'
+//    compile group: 'education', name: 'dma-in-java', version: '1.0'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '2.13.0'
+
+}
