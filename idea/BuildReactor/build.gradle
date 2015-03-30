@@ -98,6 +98,11 @@ task buildDisruptor {
     dependsOn getArtifacts('disruptor').build
     dependsOn getArtifacts('disruptor').install
 }
+task buildHazelcastOverview{
+//    dependsOn getArtifacts('disruptor').clean
+    dependsOn getArtifacts('hazelcast-overview').build
+    dependsOn getArtifacts('hazelcast-overview').install
+}
 task buildDmaInJava {
 //    dependsOn getArtifacts('dma-in-java').clean
     dependsOn getArtifacts('dma-in-java').build

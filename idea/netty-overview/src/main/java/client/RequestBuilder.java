@@ -1,5 +1,7 @@
 package client;
 
+import io.netty.handler.codec.http.HttpHeaders;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
@@ -39,7 +41,7 @@ public final class RequestBuilder {
         // Put together the HTTP request we'll send to the server.
         String request = "GET " + path + query + " HTTP/1.1\r\n" + // The request
                 "Host: " + hostname + "\r\n" + // Required in HTTP 1.1
-                "Connection: close\r\n" + // Don't keep connection open
+                "Connection: " + HttpHeaders.Values.KEEP_ALIVE +"\r\n" + // Don't keep connection open
                 "User-Agent: " + "super_geek" + "\r\n" + "\r\n";
         // Now wrap a CharBuffer around that request string
         CharBuffer requestChars = CharBuffer.wrap(request);

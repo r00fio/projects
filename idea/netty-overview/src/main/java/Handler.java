@@ -16,25 +16,26 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.locks.StampedLock;
 
 import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 /**
  * Created by bebe on 2/15/15.
+ * MONGODB IS OBJECT MAPPING OUT OF THE BOX - MAIN FEATURE!
  */
 public class Handler extends DefaultHandler<FullHttpRequest> {
-
     private final EventExecutorGroup executorGroup;
     private final String URL_BASE = "http://pixabay.com/api/?username=yury_grybkov&key=b7d42885f83d1f99e37b";
-    final String QUERY_COLLECTION_NAME = "q";
+    final static String QUERY_COLLECTION_NAME = "q";
 
     MongoClient connectionsPool;
     public Handler() throws UnknownHostException {
         executorGroup = new DefaultEventExecutorGroup(5);
         connectionsPool = new MongoClient();
     }
-
+//jmh
     @Override
     public void messageReceived(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {
         Map<String, List<String>> parameters = new QueryStringDecoder(req.getUri()).parameters();
@@ -69,7 +70,7 @@ public class Handler extends DefaultHandler<FullHttpRequest> {
         });
     }
 
-    private class GetImageTask implements Callable<String> {
+    private static class GetImageTask implements Callable<String> {
         //                String spec = "http://www.google.com";
         private final URL url;
 

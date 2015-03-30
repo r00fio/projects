@@ -31,6 +31,9 @@ import java.net.URLConnection;
  e.msg = msg;). Flush does real write to remote peer through NioSocketChannel ->
  * UnpooledUnsafeDirectByteBuf -> WritableByteChannel.write(ByteBuf) throught SocketChannelImpl.write(ByteBuf)
  *
+ *
+ *
+ * IMPORTANT DOn't do response or buf as global variable in handler!!!!!!!! In example bug
  */
 public class Server {
     public static void main(String[] args) throws Exception {
@@ -73,7 +76,8 @@ public class Server {
     private static void runServer(String ... args) {
                 new Thread(() -> {
             try {
-                HttpSnoopServer.main(args);
+//                HttpSnoopServer.main(args);
+                TstHTTPServer.main(args);
             } catch (Exception e) {
                 e.printStackTrace();
             }
