@@ -1,12 +1,13 @@
 rootProject.name = 'BuildReactor'
+
 //include 'java-speech-api'
 //include 'untitled'
 //include 'disruptor'
 //include 'dma-in-java'
 //include 'netty-overview'
 //include 'memory-model-and-management'
-//include 'spring-overview'
-include 'spark-overview'
+include 'spring-overview'
+//include 'summary-sync'
 //include 'nio-overview'
 //include 'hazelcast-overview'
 //include 'crimea-souveniers'
@@ -14,6 +15,9 @@ include 'spark-overview'
 //include 'db-scripts'
 //include 'network-and-protocols'
 //include 'java-core-traps'
+//include 'yaml-verview'
+//include 'annotation-test'
+//include 'annotation-processing'
 rootProject.children.each {project ->
     String fileBaseName = project.name.replaceAll("\\p{Upper}") { "-${it.toLowerCase()}" }
     String projectDirName = "../$fileBaseName"

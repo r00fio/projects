@@ -1,0 +1,11 @@
+rootProject.name = 'annotation-test'
+
+include 'annotation-processing'
+rootProject.children.each {project ->
+    String fileBaseName = project.name.replaceAll("\\p{Upper}") { "-${it.toLowerCase()}" }
+    String projectDirName = "../$fileBaseName"
+    project.projectDir = new File(settingsDir, projectDirName)
+    project.buildFileName = "build.gradle"
+    assert project.projectDir.isDirectory()
+    assert project.buildFile.isFile()
+}

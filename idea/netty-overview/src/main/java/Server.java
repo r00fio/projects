@@ -23,7 +23,7 @@ import java.net.URLConnection;
  * Created by bebe on 2/15/15.
  * ServerSocketImpl used for read and write by Netty
  * HttpClientCOdec.encode - > Request to bytebuf
- * Example LiginningHandler.wirte -> DefaultChannelCOntext.write -> next.invoker.write .
+ * Example LoginHandler.wirte -> DefaultChannelCOntext.write -> next.invoker.write .
  * ChannelHandlerContext keeps pipeline and operates it. Tail and head is Handlers called in begining and at the end
  * HandlerInvoker invokes handler
  * HeadHandler adapter to unsafe. AbstarctNioByteCHannel.NioByteUnsafe -> AbstractChannel.AbstractUnsafe

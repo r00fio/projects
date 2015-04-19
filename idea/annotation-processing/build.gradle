@@ -1,9 +1,15 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+
+compileJava.options.fork = true
+compileJava.options.forkOptions.executable = '/home/bebe/work/ide/idea-IU-135.1306/bin/javac'
 
 sourceCompatibility = 1.8
+group = 'annotations'
 version = '1.0'
 
 repositories {
+
     mavenCentral()
 }
 

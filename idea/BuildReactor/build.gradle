@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.wiredforcode:gradle-heroku-plugin:1.0.0"
+//        compile
     }
 }
 
@@ -22,7 +23,14 @@ subprojects {
     targetCompatibility = 1.8
 
     sourceSets {
-        main.java.srcDirs += 'src/main/java'
+        main {
+            java {
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/resources'
+            }
+        }
     }
     repositories {
         mavenCentral()
