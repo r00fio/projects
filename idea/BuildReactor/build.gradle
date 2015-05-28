@@ -38,7 +38,9 @@ subprojects {
     }
     dependencies {
         compile group: 'com.google.guava', name: 'guava', version:'18.0'
-        testCompile "junit:junit:4.11"
+        testCompile "junit:junit:4.11",
+                'org.testng:testng:6.8.21'
+
     }
     task printProps << {
         println org.gradle.java.home

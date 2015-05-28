@@ -1,3 +1,5 @@
+import algorithm.MergeSort;
+
 import static org.junit.Assert.assertArrayEquals;
 
 public class MergeSortTest {

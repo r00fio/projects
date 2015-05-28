@@ -1,10 +1,19 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 version = '1.0'
+apply plugin: 'java'
+apply plugin: 'maven'
+compileJava.options.fork = true
+compileJava.options.forkOptions.executable = '/home/bebe/work/ide/idea-IU-135.1306/bin/javac'
 
 repositories {
     mavenCentral()
+}
+sourceSets{
+    main.java.srcDirs 'src/main/java'
+    test.java.srcDirs 'src/main/test'
+    main.resources.srcDirs 'src/main/resources'
 }
 
 dependencies {
