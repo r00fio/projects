@@ -1,0 +1,37 @@
+When the Servlet container starts, it:
+
+reads web.xml;
+finds the declared Servlets in the classpath; and
+loads and instantiates each Servlet only once.
+Roughly, like this:
+
+String urlPattern = parseWebXmlAndRetrieveServletUrlPattern();
+String servletClass = parseWebXmlAndRetrieveServletClass();
+HttpServlet servlet = (HttpServlet) Class.forName(servletClass).newInstance();
+servlet.init();
+servlets.put(urlPattern, servlet); // Similar to a map interface.
+Those Servlets are stored in memory and reused every time the request URL matches the Servlet's associated url-pattern. The servlet container then executes code similar to:
+
+for (Entry<String, HttpServlet> entry : servlets.entrySet()) {
+    String urlPattern = entry.getKey();
+    HttpServlet servlet = entry.getValue();
+    if (request.getRequestURL().matches(urlPattern)) {
+        servlet.service(request, response);
+        break;
+    }
+}
+The GenericServlet#service() on its turn decides which of the doGet(), doPost(), etc.. to invoke based on HttpServletRequest#getMethod().
+
+You see, the servletcontainer reuses the same servlet instance for every request. In other words: the servlets are shared among every request. That's why it's extremely important to write servlet code the threadsafe manner --which is actually simple: just do not assign request or session scoped data as servlet instance variables, but just as method local variables. E.g.
+
+public class MyServlet extends HttpServlet {
+
+    private Object thisIsNOTThreadSafe;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Object thisIsThreadSafe;
+
+        thisIsNOTThreadSafe = request.getParameter("foo"); // BAD!! Shared among all requests!
+        thisIsThreadSafe = request.getParameter("foo"); // OK, this is thread safe.
+    }
+}
