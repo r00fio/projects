@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.roofio.entity">
+    <class name="com.roofio.entity.Film" table="film">
+        <id name="filmId" column="film_id">
+            <generator class="native"/>
+        </id>
+        <property name="languageId" column="language_id" type="java.lang.Integer"/>
+        <property name="description" column="description"/>
+    </class>
+</hibernate-mapping>

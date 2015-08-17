@@ -1,5 +1,7 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,23 +12,28 @@ public class OverrideRules {
 
     }
 
-    class M {
-        protected Collection method(Collection list) {
+    interface I {
+        Iterable method(Iterable iterable);
+    }
+
+    class M implements I{
+
+        @Override
+        public Collection method(Iterable iterable) {
             return null;
         }
     }
 
     class M2 extends M{
         @Override
-        public Collection method(Collection list) { // you can give access upper then in parent, but cant give a lover like package private
+        public Collection method(Iterable list) { // you can give access upper then in parent, but cant give a lover like package private
             return null;
         }
     }
 
     class M3 extends M {
         @Override
-        protected List method(Collection list) { // you can set child of  return type but not parent, bacause open for
-                                                // extension, u can't modify parameter type
+        public List method(Iterable list) { // you can set child of  return type but not parent, bacause open for
             return null;
         }
     }

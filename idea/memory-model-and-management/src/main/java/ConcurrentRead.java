@@ -3,7 +3,7 @@
  */
 public class ConcurrentRead {
     private int incMe1;
-    private volatile int calls;
+    private volatile int calls; //
 
     public static void main(String[] args) {
         ConcurrentRead concurrentRead = new ConcurrentRead();
@@ -14,7 +14,7 @@ public class ConcurrentRead {
     public void increment() {
         while (incMe1 < Integer.MAX_VALUE) {
             calls++;
-            incMe1++;
+            incMe1++; // happens before volatile var not works
         }
     }
 

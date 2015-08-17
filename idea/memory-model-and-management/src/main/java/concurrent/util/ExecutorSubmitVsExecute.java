@@ -1,5 +1,6 @@
 package concurrent.util;
 
+import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,5 +15,6 @@ public class ExecutorSubmitVsExecute {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.submit(()->{
             System.out.println("htststas");});
+
     }
 }
